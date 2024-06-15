@@ -1,19 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
-namespace WebApiVylex.Models
+namespace WebApiVylex.DTOs
 {
-    public class Curso
+    public class EstudantesDto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
+        [Display(Name = "Obrigatorio")]
         public string Nome { get; set; }
         [Required]
-        public string Descricao { get; set; }
-
-        public ICollection<Avaliacao> avaliaccoes { get; set; }
+        public string Email { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApiVylex.Data;
+using WebApiVylex.DTOs;
 using WebApiVylex.Models;
 using WebApiVylex.Repository.Interface;
 
@@ -17,6 +19,24 @@ namespace WebApiVylex.Repository
         public async Task<IEnumerable<Curso>> GetAllAsync()
         {
             return await _context.Cursos.ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<CursoComAvaliacoesDto>> GetAllCursoComAvaliacaoAsync()
+        {
+            var query = from Curso in _context.Cursos
+                        join Avaliacao in _context.Avaliacoes on Curso.Id equals Avaliacao.CursoId
+                        select new
+                        {
+                            Avaliacao.Id,
+                            Avaliacao.DataHora,
+                            Avaliacao.CursoId,
+                            Avaliacao.Estrelas,
+                            Curso.Nome,
+                            Curso.Descricao,
+                        };
+            var teste=await query.ToListAsync();
+            return null;
         }
 
         public async Task<Curso> GetByIdAsync(int id)

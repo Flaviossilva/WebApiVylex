@@ -59,36 +59,11 @@ namespace WebApiVylex.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}/avaliacoes")]
-        public async Task<ActionResult<CursoComAvaliacoesDto>> GetCursoComAvaliacoes(int id)
+        [HttpGet("avaliacoeiiis")]
+        public async Task<ActionResult<CursoComAvaliacoesDto>> GetCursoComAvaliacoes(Curso curso)
         {
-            var curso = await _cursoRepository.GetByIdAsync(id);
-
-            if (curso == null)
-            {
-                return NotFound();
-            }
-
-            var avaliacoes = await _avaliacaoRepository.GetAllAsync();
-            var cursoAvaliacoes = avaliacoes.Where(a => a.CursoId == id).ToList();
-
-            var cursoComAvaliacoes = new CursoComAvaliacoesDto
-            {
-                Id = curso.Id,
-                Nome = curso.Nome,
-                Descricao = curso.Descricao,
-                Avaliacoes = cursoAvaliacoes.Select(a => new AvaliacaoDto
-                {
-                    Id = a.Id,
-                    EstudanteId = a.EstudanteId,
-                    NomeEstudante = a.Estudante.Nome,
-                    Estrelas = a.Estrelas,
-                    Comentario = a.Comentario,
-                    DataHora = a.DataHora
-                }).ToList()
-            };
-
-            return Ok(cursoComAvaliacoes);
+            var cursos = await _cursoRepository.GetAllAsync();
+            return Ok(cursos);
         }
 
         [HttpDelete("{id}")]

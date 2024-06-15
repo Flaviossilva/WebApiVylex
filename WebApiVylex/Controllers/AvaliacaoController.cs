@@ -66,13 +66,7 @@ namespace WebApiVylex.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAvaliacao(int id)
         {
-            var avaliacao = await _avaliacaoRepository.GetByIdAsync(id);
-            if (avaliacao == null)
-            {
-                return NotFound();
-            }
-
-            await _avaliacaoRepository.DeleteAsync(avaliacao.Id);
+            await _avaliacaoRepository.DeleteAsync(id);
             return NoContent();
         }
     }

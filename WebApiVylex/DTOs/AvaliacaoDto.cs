@@ -2,6 +2,7 @@
 {
     public class AvaliacaoDto
     {
+
         public int Id { get; set; }
         public int EstudanteId { get; set; }
         public string NomeEstudante { get; set; }

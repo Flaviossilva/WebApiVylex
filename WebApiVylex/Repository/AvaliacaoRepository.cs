@@ -16,16 +16,12 @@ namespace WebApiVylex.Repository
 
         public async Task<IEnumerable<Avaliacao>> GetAllAsync()
         {
-            return await _context.Avaliacoes.Include(a => a.Estudante)
-                                            .Include(a => a.Curso)
-                                            .ToListAsync();
+            return await _context.Avaliacoes.ToListAsync();
         }
 
         public async Task<Avaliacao> GetByIdAsync(int id)
         {
-            return await _context.Avaliacoes.Include(a => a.Estudante)
-                                            .Include(a => a.Curso)
-                                            .FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Avaliacoes.FindAsync(id);
         }
 
         public async Task AddAsync(Avaliacao avaliacao)
