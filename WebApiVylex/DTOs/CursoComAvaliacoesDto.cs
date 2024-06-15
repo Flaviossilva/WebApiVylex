@@ -7,6 +7,7 @@ namespace WebApiVylex.DTOs
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public List<Avaliacao> Avaliacoes { get; set; }
+        public List<AvaliacaoEstudante> Avaliacoes { get; set; } = new List<AvaliacaoEstudante>();
+
     }
 }

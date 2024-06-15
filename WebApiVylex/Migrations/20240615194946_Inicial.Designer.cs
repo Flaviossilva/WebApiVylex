@@ -11,7 +11,7 @@ using WebApiVylex.Data;
 namespace WebApiVylex.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240614165844_Inicial")]
+    [Migration("20240615194946_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,8 +28,8 @@ namespace WebApiVylex.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comentario")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
@@ -45,10 +45,6 @@ namespace WebApiVylex.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("EstudanteId");
-
                     b.ToTable("Avaliacoes");
                 });
 
@@ -60,11 +56,13 @@ namespace WebApiVylex.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
 
                     b.HasKey("Id");
 
@@ -83,35 +81,12 @@ namespace WebApiVylex.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Estudantes");
-                });
-
-            modelBuilder.Entity("WebApiVylex.Models.Avaliacao", b =>
-                {
-                    b.HasOne("WebApiVylex.Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApiVylex.Models.Estudante", "Estudante")
-                        .WithMany("Avaliacoes")
-                        .HasForeignKey("EstudanteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
-
-                    b.Navigation("Estudante");
-                });
-
-            modelBuilder.Entity("WebApiVylex.Models.Estudante", b =>
-                {
-                    b.Navigation("Avaliacoes");
                 });
 #pragma warning restore 612, 618
         }
