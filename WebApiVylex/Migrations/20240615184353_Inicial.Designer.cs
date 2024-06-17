@@ -11,7 +11,7 @@ using WebApiVylex.Data;
 namespace WebApiVylex.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240614165844_Inicial")]
+    [Migration("20240615184353_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,6 @@ namespace WebApiVylex.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comentario")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("CursoId")
@@ -44,10 +43,6 @@ namespace WebApiVylex.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("EstudanteId");
 
                     b.ToTable("Avaliacoes");
                 });
@@ -88,30 +83,6 @@ namespace WebApiVylex.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Estudantes");
-                });
-
-            modelBuilder.Entity("WebApiVylex.Models.Avaliacao", b =>
-                {
-                    b.HasOne("WebApiVylex.Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApiVylex.Models.Estudante", "Estudante")
-                        .WithMany("Avaliacoes")
-                        .HasForeignKey("EstudanteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
-
-                    b.Navigation("Estudante");
-                });
-
-            modelBuilder.Entity("WebApiVylex.Models.Estudante", b =>
-                {
-                    b.Navigation("Avaliacoes");
                 });
 #pragma warning restore 612, 618
         }

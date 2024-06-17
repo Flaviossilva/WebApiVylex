@@ -2,13 +2,27 @@ using Microsoft.EntityFrameworkCore;
 using WebApiVylex.Data;
 using WebApiVylex.Repository.Interface;
 using WebApiVylex.Repository;
-using Microsoft.Extensions.Configuration;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+
+//Fluente Validator 
+builder.Services.AddFluentValidationAutoValidation(); // Adiciona a auto-validação do FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining<Program>(); // Adiciona os validadores do assembly atual
+
+// Configuração opcional para desativar validação de data annotations
+builder.Services.AddFluentValidationAutoValidation(fv =>
+{
+    fv.DisableDataAnnotationsValidation = true;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -35,6 +49,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

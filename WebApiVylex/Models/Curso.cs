@@ -9,11 +9,9 @@ namespace WebApiVylex.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        public string Nome { get; set; }
-        [Required]
-        public string Descricao { get; set; }
 
-        public ICollection<Avaliacao> avaliaccoes { get; set; }
+        public string Nome { get; set; }
+
+        public string Descricao { get; set; }
     }
 }

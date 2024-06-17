@@ -21,22 +21,41 @@ namespace WebApiVylex.Repository
             return await _context.Cursos.ToListAsync();
         }
 
-
         public async Task<IEnumerable<CursoComAvaliacoesDto>> GetAllCursoComAvaliacaoAsync()
         {
-            var query = from Curso in _context.Cursos
-                        join Avaliacao in _context.Avaliacoes on Curso.Id equals Avaliacao.CursoId
-                        select new
-                        {
-                            Avaliacao.Id,
-                            Avaliacao.DataHora,
-                            Avaliacao.CursoId,
-                            Avaliacao.Estrelas,
-                            Curso.Nome,
-                            Curso.Descricao,
-                        };
-            var teste=await query.ToListAsync();
-            return null;
+            List<CursoComAvaliacoesDto> ListaDeCursos = new List<CursoComAvaliacoesDto>();
+            List<Curso> retornoCursos = _context.Cursos.ToList();
+
+            foreach (var cursoRetorno in retornoCursos)
+            {
+                CursoComAvaliacoesDto Curso = new CursoComAvaliacoesDto();
+                Curso.Id = cursoRetorno.Id;
+                Curso.Nome = cursoRetorno.Nome;
+                Curso.Descricao = cursoRetorno.Descricao;
+
+                List<Avaliacao> avaliacoes = _context.Avaliacoes.Where(s => s.CursoId == cursoRetorno.Id).ToList();
+                Curso.Avaliacoes.Clear();
+                foreach (var avaliacoesRetorno in avaliacoes)
+                {
+                    AvaliacaoEstudante CastinDados = new AvaliacaoEstudante();
+                    Estudante estudante = _context.Estudantes.Where(s => s.Id == avaliacoesRetorno.EstudanteId
+                    ).First();
+                    if (estudante != null)
+                    {
+                        CastinDados.Id = avaliacoesRetorno.Id;
+                        CastinDados.EstudanteId = estudante.Id;
+                        CastinDados.Nome = estudante.Nome;
+                        CastinDados.Estrelas = avaliacoesRetorno.Estrelas;
+                        CastinDados.Comentario = avaliacoesRetorno.Comentario;
+                        CastinDados.DataHora = avaliacoesRetorno.DataHora;
+
+                        Curso.Avaliacoes.Add(CastinDados);
+                    }
+                }
+                ListaDeCursos.Add(Curso);
+            }
+
+            return ListaDeCursos;
         }
 
         public async Task<Curso> GetByIdAsync(int id)
@@ -55,7 +74,6 @@ namespace WebApiVylex.Repository
             _context.Entry(curso).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
-
         public async Task DeleteAsync(int id)
         {
             var curso = await _context.Cursos.FindAsync(id);
@@ -65,7 +83,6 @@ namespace WebApiVylex.Repository
                 await _context.SaveChangesAsync();
             }
         }
-
         public async Task<bool> ExistsAsync(int id)
         {
             return await _context.Cursos.AnyAsync(c => c.Id == id);

@@ -3,9 +3,15 @@ using WebApiVylex.DTOs;
 using WebApiVylex.Models;
 using WebApiVylex.Repository;
 using WebApiVylex.Repository.Interface;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApiVylex.Controllers
 {
+    /// <summary>
+    /// Controlador para operações relacionadas a cursos.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CursoController : ControllerBase
@@ -19,6 +25,9 @@ namespace WebApiVylex.Controllers
             _avaliacaoRepository = avaliacaoRepository;
         }
 
+        /// <summary>
+        /// Obtém todos os cursos.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Curso>>> GetCursos()
         {
@@ -26,6 +35,10 @@ namespace WebApiVylex.Controllers
             return Ok(cursos);
         }
 
+        /// <summary>
+        /// Obtém um curso específico pelo ID.
+        /// </summary>
+        /// <param name="id">ID do curso.</param>
         [HttpGet("{id}")]
         public async Task<ActionResult<Curso>> GetCurso(int id)
         {
@@ -39,6 +52,10 @@ namespace WebApiVylex.Controllers
             return Ok(curso);
         }
 
+        /// <summary>
+        /// Cria um novo curso.
+        /// </summary>
+        /// <param name="curso">Dados do curso a ser criado.</param>
         [HttpPost]
         public async Task<ActionResult<Curso>> PostCurso(Curso curso)
         {
@@ -46,6 +63,11 @@ namespace WebApiVylex.Controllers
             return CreatedAtAction("GetCurso", new { id = curso.Id }, curso);
         }
 
+        /// <summary>
+        /// Atualiza um curso existente pelo ID.
+        /// </summary>
+        /// <param name="id">ID do curso a ser atualizado.</param>
+        /// <param name="curso">Dados atualizados do curso.</param>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCurso(int id, Curso curso)
         {
@@ -59,13 +81,20 @@ namespace WebApiVylex.Controllers
             return NoContent();
         }
 
-        [HttpGet("avaliacoeiiis")]
-        public async Task<ActionResult<CursoComAvaliacoesDto>> GetCursoComAvaliacoes(Curso curso)
+        /// <summary>
+        /// Obtém todos os cursos com suas avaliações associadas.
+        /// </summary>
+        [HttpGet("avaliacoes")]
+        public async Task<ActionResult<CursoComAvaliacoesDto>> GetCursoComAvaliacoes()
         {
-            var cursos = await _cursoRepository.GetAllAsync();
+            var cursos = await _cursoRepository.GetAllCursoComAvaliacaoAsync();
             return Ok(cursos);
         }
 
+        /// <summary>
+        /// Exclui um curso pelo ID.
+        /// </summary>
+        /// <param name="id">ID do curso a ser excluído.</param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCurso(int id)
         {
