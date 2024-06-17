@@ -3,9 +3,6 @@ using WebApiVylex.DTOs;
 using WebApiVylex.Models;
 using WebApiVylex.Repository;
 using WebApiVylex.Repository.Interface;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace WebApiVylex.Controllers
 {

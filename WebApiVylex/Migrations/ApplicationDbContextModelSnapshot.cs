@@ -26,8 +26,8 @@ namespace WebApiVylex.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comentario")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
@@ -79,8 +79,8 @@ namespace WebApiVylex.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("varchar(80)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
