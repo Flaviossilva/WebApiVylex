@@ -30,10 +30,13 @@ namespace WebApiVylex.Controllers
         /// Obtém todas as avaliações.
         /// </summary>
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Avaliacao>>> GetAvaliacoes()
         {
+
             var avaliacoes = await _avaliacaoRepository.GetAllAsync();
             return Ok(avaliacoes);
+
         }
 
         /// <summary>
