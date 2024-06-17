@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApiVylex.DTOs;
 using WebApiVylex.Models;
 using WebApiVylex.Repository;
@@ -26,6 +27,7 @@ namespace WebApiVylex.Controllers
         /// Obtém todos os cursos.
         /// </summary>
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Curso>>> GetCursos()
         {
             var cursos = await _cursoRepository.GetAllAsync();
@@ -37,6 +39,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <param name="id">ID do curso.</param>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Curso>> GetCurso(int id)
         {
             var curso = await _cursoRepository.GetByIdAsync(id);
@@ -54,6 +57,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <param name="curso">Dados do curso a ser criado.</param>
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Curso>> PostCurso(Curso curso)
         {
             await _cursoRepository.AddAsync(curso);
@@ -66,6 +70,7 @@ namespace WebApiVylex.Controllers
         /// <param name="id">ID do curso a ser atualizado.</param>
         /// <param name="curso">Dados atualizados do curso.</param>
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutCurso(int id, Curso curso)
         {
             if (id != curso.Id)
@@ -82,6 +87,7 @@ namespace WebApiVylex.Controllers
         /// Obtém todos os cursos com suas avaliações associadas.
         /// </summary>
         [HttpGet("avaliacoes")]
+        [Authorize]
         public async Task<ActionResult<CursoComAvaliacoesDto>> GetCursoComAvaliacoes()
         {
             var cursos = await _cursoRepository.GetAllCursoComAvaliacaoAsync();
@@ -93,6 +99,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <param name="id">ID do curso a ser excluído.</param>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteCurso(int id)
         {
             await _cursoRepository.DeleteAsync(id);

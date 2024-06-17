@@ -44,6 +44,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <param name="id">ID da avaliação.</param>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Avaliacao>> GetAvaliacao(int id)
         {
             var avaliacao = await _avaliacaoRepository.GetByIdAsync(id);
@@ -61,6 +62,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <param name="avaliacao">Dados da avaliação a ser criada.</param>
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Avaliacao>> PostAvaliacao(Avaliacao avaliacao)
         {
             await _avaliacaoRepository.AddAsync(avaliacao);
@@ -73,6 +75,7 @@ namespace WebApiVylex.Controllers
         /// <param name="id">ID da avaliação a ser atualizada.</param>
         /// <param name="avaliacao">Dados atualizados da avaliação.</param>
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutAvaliacao(int id, Avaliacao avaliacao)
         {
             if (id != avaliacao.Id)
@@ -89,6 +92,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <param name="id">ID da avaliação a ser excluída.</param>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteAvaliacao(int id)
         {
             await _avaliacaoRepository.DeleteAsync(id);

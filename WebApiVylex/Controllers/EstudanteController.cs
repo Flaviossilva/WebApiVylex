@@ -26,6 +26,7 @@ namespace WebApiVylex.Controllers
         /// </summary>
         /// <returns>Lista de estudantes.</returns>
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Estudante>>> GetEstudantes()
         {
             var estudantes = await _estudanteRepository.GetAllAsync();
@@ -38,6 +39,7 @@ namespace WebApiVylex.Controllers
         /// <param name="id">ID do estudante.</param>
         /// <returns>O estudante encontrado.</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Estudante>> GetEstudante(int id)
         {
             var estudante = await _estudanteRepository.GetByIdAsync(id);
@@ -56,6 +58,7 @@ namespace WebApiVylex.Controllers
         /// <param name="estudante">Dados do estudante a serem criados.</param>
         /// <returns>O estudante criado.</returns>
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Estudante>> PostEstudante(Estudante estudante)
         {
             await _estudanteRepository.AddAsync(estudante);
@@ -69,6 +72,7 @@ namespace WebApiVylex.Controllers
         /// <param name="estudante">Dados atualizados do estudante.</param>
         /// <returns>Um código de status indicando o resultado da operação.</returns>
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutEstudante(int id, Estudante estudante)
         {
             if (id != estudante.Id)
@@ -87,6 +91,7 @@ namespace WebApiVylex.Controllers
         /// <param name="id">ID do estudante a ser excluído.</param>
         /// <returns>Um código de status indicando o resultado da operação.</returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteEstudante(int id)
         {
             await _estudanteRepository.DeleteAsync(id);
