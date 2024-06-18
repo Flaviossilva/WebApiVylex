@@ -58,7 +58,7 @@ builder.Services.AddFluentValidationAutoValidation(fv =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minha API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiVylex API", Version = "v1" });
 
     // Configuração do JWT no Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

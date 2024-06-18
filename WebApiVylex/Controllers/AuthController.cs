@@ -16,7 +16,7 @@ namespace WebApiVylex.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLogin request)
         {
-            if (request.Username == "test" && request.Password == "password") // Verifique suas credenciais
+            if (request.Username == "WebApiVylex" && request.Password == "WebApiVylex") 
             {
                 var token = GenerateJwtToken();
                 return Ok(new { token });
