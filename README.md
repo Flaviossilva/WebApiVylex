@@ -41,9 +41,34 @@ dotnet ef database update
 
 Visual Studio
 
-Iniciar o Projeto e utalizar os end points
+Iniciar o Projeto 
 
-<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/9338b14f-e648-48ee-befd-f751069ba83a">
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/783c1207-f1aa-4271-8ec2-36ea8e690d3f">
+
+é necessario estar autenticado para utilizar os end points, preencher usuario "WebApiVylex" e senha "WebApiVylex" no /Auth/login
+
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/ac3da069-94c6-40c5-a495-03246c60ff1c">
+
+copiar o token retornado e utilizar no icone de cadeado
+
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/fe7de5b7-096b-40db-bfe1-e53ce62ae7fd">
+
+
+
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/2f3be067-74e3-4c76-be9a-f575cc41b191">
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/2f3be067-74e3-4c76-be9a-f575cc41b191">
+
+
+
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/880d62dc-7714-4790-9bc5-b9f2f56cfa84">
+
+Utilizar os end points
+
+<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/98634a4e-a5d5-478b-9d01-0c6d26a39dd9">
+
+
+
+
 
 
 
