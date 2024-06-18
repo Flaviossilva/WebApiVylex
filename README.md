@@ -55,8 +55,11 @@ copiar o token retornado e utilizar no icone de cadeado
 
 
 
+
+
 <img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/2f3be067-74e3-4c76-be9a-f575cc41b191">
-<img width="959" alt="image" src="https://github.com/Flaviossilva/WebApiVylex/assets/32334149/2f3be067-74e3-4c76-be9a-f575cc41b191">
+
+
 
 
 
